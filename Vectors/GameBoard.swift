@@ -110,4 +110,11 @@ class Gameboard {
             tiles[row][i].changeColor(color)
         }
     }
+    
+    // change column color
+    func changeColumnColor(column: Int, color:TileColor.RawValue) {
+        for (var i = 0; i < tiles[column].count; i++) {
+            tiles[i][column].changeColor(color)
+        }
+    }
 }

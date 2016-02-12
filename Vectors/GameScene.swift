@@ -35,6 +35,9 @@ class GameScene: SKScene {
         
         // change color of gameboard row to red (raw value = 1) as test
         game_board.changeRowColor(3, color: 1)
+        
+        // change color of gameboard column to blue (raw value = 2) as test
+        game_board.changeColumnColor(4, color: 2)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
