@@ -22,9 +22,9 @@ class GameScene: SKScene {
         // red tile
         let test_tile_color_enum = TileColor(rawValue: 1)
         print("Raw value: \(test_tile_color_enum?.description)")
-        //
+        
         // add a gameboard to the screen
-        let game_board = Gameboard(rows: 10, columns: 10, boardWidth: self.size.width, boardHeight: self.size.height)
+        let game_board = Gameboard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
@@ -32,6 +32,9 @@ class GameScene: SKScene {
                 self.addChild(tile.sprite!)
             }
         }
+        
+        // change color of gameboard row to red (raw value = 1) as test
+        game_board.changeRowColor(3, color: 1)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

@@ -71,6 +71,7 @@ class Tile: CustomStringConvertible {
         } else if (player_num == 2) {
             self.color = .Blue
         }
+        self.sprite = SKSpriteNode(imageNamed: "\(spriteName)")
     }
 
 }
