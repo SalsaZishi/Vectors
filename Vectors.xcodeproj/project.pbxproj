@@ -15,6 +15,7 @@
 		7AD15DF51C6D5E76001B8683 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AD15DF41C6D5E76001B8683 /* Assets.xcassets */; };
 		7AD15DF81C6D5E76001B8683 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AD15DF61C6D5E76001B8683 /* LaunchScreen.storyboard */; };
 		7AD15E021C6D5F1B001B8683 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD15E011C6D5F1B001B8683 /* Tile.swift */; };
+		7AD15E041C6D7287001B8683 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD15E031C6D7287001B8683 /* GameBoard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		7AD15DF71C6D5E76001B8683 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AD15DF91C6D5E76001B8683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AD15E011C6D5F1B001B8683 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		7AD15E031C6D7287001B8683 /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +65,13 @@
 				7AD15DE91C6D5E76001B8683 /* AppDelegate.swift */,
 				7AD15DEB1C6D5E76001B8683 /* GameScene.sks */,
 				7AD15DED1C6D5E76001B8683 /* GameScene.swift */,
+				7AD15E031C6D7287001B8683 /* GameBoard.swift */,
+				7AD15E011C6D5F1B001B8683 /* Tile.swift */,
 				7AD15DEF1C6D5E76001B8683 /* GameViewController.swift */,
 				7AD15DF11C6D5E76001B8683 /* Main.storyboard */,
 				7AD15DF41C6D5E76001B8683 /* Assets.xcassets */,
 				7AD15DF61C6D5E76001B8683 /* LaunchScreen.storyboard */,
 				7AD15DF91C6D5E76001B8683 /* Info.plist */,
-				7AD15E011C6D5F1B001B8683 /* Tile.swift */,
 			);
 			path = Vectors;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			files = (
 				7AD15DEE1C6D5E76001B8683 /* GameScene.swift in Sources */,
 				7AD15E021C6D5F1B001B8683 /* Tile.swift in Sources */,
+				7AD15E041C6D7287001B8683 /* GameBoard.swift in Sources */,
 				7AD15DF01C6D5E76001B8683 /* GameViewController.swift in Sources */,
 				7AD15DEA1C6D5E76001B8683 /* AppDelegate.swift in Sources */,
 			);
