@@ -40,6 +40,8 @@ class GameScene: SKScene {
                 self.addChild(tile.sprite!)
             }
         }
+        // initialize enum representing brush color with value 0 = red
+        var brush_color = BrushColor(rawValue: 0)
         
         // change color of gameboard row to red (raw value = 1) as test
         //game_board.changeRowColor(0, color: 1)
