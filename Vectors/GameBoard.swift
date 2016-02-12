@@ -8,15 +8,16 @@
 import Foundation
 import SpriteKit
 
-// Need to make tiles into squares
 class Gameboard {
     
-    // array that holds all the tiles
     var tiles: [[Tile]] = [[Tile]]()
     
     init(rows: Int, columns: Int, boardWidth: CGFloat, boardHeight: CGFloat) {
         
         let board_scene_ratio = 0.75
+        
+        // screen size view var is skewed?
+        //yeah i just rememereed, yo gotta add something to get the right screen size as the gamescene.ksks file messes it up
         
         // Bottom (y = 0) so put board start at top
         print("Board Height: \(boardHeight)")
@@ -24,19 +25,9 @@ class Gameboard {
         // Left (x = 0) so put board start at left
         print("Board Width: \(boardWidth)")
         
-        // we want each tile to be a square with equal width and height
-        // If board height and width are not equal, choose the smaller value of the two
-        // and set both equal to the smaller value
-        var boardDimension: CGFloat
-        if (boardWidth < boardHeight) {
-            boardDimension = boardWidth
-        } else {
-            boardDimension = boardHeight
-        }
-        
         // Adjust tileSprite size to fit into 75% of the board depending on number of tiles
-        let spriteHeight = CGFloat(board_scene_ratio) * boardDimension / CGFloat(columns)
-        let spriteWidth = CGFloat(board_scene_ratio) * boardDimension / CGFloat(rows)
+        let spriteHeight = CGFloat(board_scene_ratio) * boardHeight / CGFloat(columns)
+        let spriteWidth = CGFloat(board_scene_ratio) * boardWidth / CGFloat(rows)
         print("Space Height: \(spriteHeight)")
         print("Space Width: \(spriteWidth)")
         
@@ -45,8 +36,8 @@ class Gameboard {
         // 0, 0 is bottom left so x = 0, y = boardHeight = top left
         // increment x a little to the right: spriteWidth / 2.0 = center of leftmost tile
         // and 0.25 / 2 = 12.5% of the tile (center of the left gap caused by the board taking up 75% of scene)
-        let xStart: CGFloat = spriteWidth/CGFloat(2.0) + CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
-        let yStart: CGFloat = boardDimension - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
+        let xStart: CGFloat = spriteWidth/CGFloat(2.0) + CGFloat((1.0 - board_scene_ratio)/2.0) * boardWidth
+        let yStart: CGFloat = boardHeight - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardHeight
         
         // declare xCoord and yCoord vars
         var xCoord: CGFloat = CGFloat(0.0)
@@ -74,6 +65,9 @@ class Gameboard {
                     // for some reason this spacing is bigger than the actual sprite image so it
                     // causes empty nil space between the tiles...
                     xCoord += spriteWidth
+                    
+                    // this works but can't be guaranteed for all iPhones
+                    // xCoord += 20.0
                 }
                 
                 let position = CGPointMake(xCoord, yCoord)

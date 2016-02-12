@@ -11,6 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
+        self.size = view.bounds.size
         
         // create a test tile to see which code calls what color name and is redundant
         // initialize tile, default color is blank
@@ -21,12 +22,13 @@ class GameScene: SKScene {
         // red tile
         let test_tile_color_enum = TileColor(rawValue: 1)
         print("Raw value: \(test_tile_color_enum?.description)")
-        
+        //
         // add a gameboard to the screen
-        let game_board = Gameboard(rows: 10, columns: 10, boardWidth: view.bounds.width, boardHeight: view.bounds.height)
+        let game_board = Gameboard(rows: 5, columns: 5, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
+                print(tile.description)
                 self.addChild(tile.sprite!)
             }
         }
