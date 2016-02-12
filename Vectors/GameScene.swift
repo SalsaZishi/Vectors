@@ -32,12 +32,22 @@ class GameScene: SKScene {
                 self.addChild(tile.sprite!)
             }
         }
+        // initialize enum representing brush color with value 0 = red
+        var brush_color = BrushColor(rawValue: 0)
         
-        // change color of gameboard row to red (raw value = 1) as test
-        game_board.changeRowColor(3, color: 1)
+        // change color of gameboard row 3 to red (raw value = 1) as test
+        game_board.changeRowColor(3, color: (brush_color?.rawValue)!)
+        
+        // change color of brush to value 1 = blue
+        changeBrushColor(brush_color!)
         
         // change color of gameboard column to blue (raw value = 2) as test
-        game_board.changeColumnColor(4, color: 2)
+        game_board.changeColumnColor(4, color: (brush_color?.rawValue)!)
+    }
+    
+    // change brush color function
+    func changeBrushColor(var b_color: BrushColor) {
+        b_color = BrushColor(rawValue: (b_color.rawValue + 1) % 2)!
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

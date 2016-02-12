@@ -96,8 +96,8 @@ class Gameboard {
     
     func tileFromName(tileName: String) -> Tile? {
         // no way to access character at index in swift see: https://www.reddit.com/r/swift/comments/2bvrh9/getting_a_specific_character_in_a_string/
-        let colIndex = tileName.startIndex.advancedBy(0)
-        let rowIndex = tileName.startIndex.advancedBy(3)
+        let colIndex = tileName.startIndex.advancedBy(0)    // why advanced by 0?
+        let rowIndex = tileName.startIndex.advancedBy(3)    // why advanced by 3?
         let row = Int(String(tileName[rowIndex]))!
         let column = Int(String(tileName[colIndex]))!
         
@@ -107,14 +107,14 @@ class Gameboard {
     // change row color
     func changeRowColor(row: Int, color:TileColor.RawValue) {
         for (var i = 0; i < tiles[row].count; i++) {
-            tiles[row][i].changeColor(color)
+            tiles[row][i].changeTileColor(color)
         }
     }
     
     // change column color
     func changeColumnColor(column: Int, color:TileColor.RawValue) {
         for (var i = 0; i < tiles[column].count; i++) {
-            tiles[i][column].changeColor(color)
+            tiles[i][column].changeTileColor(color)
         }
     }
 }
