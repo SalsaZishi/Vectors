@@ -17,7 +17,6 @@ class Gameboard {
         let board_scene_ratio = 0.75
         
         // screen size view var is skewed?
-        //yeah i just rememereed, yo gotta add something to get the right screen size as the gamescene.ksks file messes it up
         
         // Bottom (y = 0) so put board start at top
         print("Board Height: \(boardHeight)")
