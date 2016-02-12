@@ -25,9 +25,17 @@ class Gameboard {
         // Left (x = 0) so put board start at left
         print("Board Width: \(boardWidth)")
         
+        // make gameboard square
+        let boardDimension: CGFloat
+        if (boardWidth < boardHeight) {
+            boardDimension = boardWidth
+        } else {
+            boardDimension = boardHeight
+        }
+        
         // Adjust tileSprite size to fit into 75% of the board depending on number of tiles
-        let spriteHeight = CGFloat(board_scene_ratio) * boardHeight / CGFloat(columns)
-        let spriteWidth = CGFloat(board_scene_ratio) * boardWidth / CGFloat(rows)
+        let spriteHeight = CGFloat(board_scene_ratio) * boardDimension / CGFloat(columns)
+        let spriteWidth = CGFloat(board_scene_ratio) * boardDimension / CGFloat(rows)
         print("Space Height: \(spriteHeight)")
         print("Space Width: \(spriteWidth)")
         
@@ -36,8 +44,8 @@ class Gameboard {
         // 0, 0 is bottom left so x = 0, y = boardHeight = top left
         // increment x a little to the right: spriteWidth / 2.0 = center of leftmost tile
         // and 0.25 / 2 = 12.5% of the tile (center of the left gap caused by the board taking up 75% of scene)
-        let xStart: CGFloat = spriteWidth/CGFloat(2.0) + CGFloat((1.0 - board_scene_ratio)/2.0) * boardWidth
-        let yStart: CGFloat = boardHeight - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardHeight
+        let xStart: CGFloat = spriteWidth/CGFloat(2.0) + CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
+        let yStart: CGFloat = boardHeight - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
         
         // declare xCoord and yCoord vars
         var xCoord: CGFloat = CGFloat(0.0)

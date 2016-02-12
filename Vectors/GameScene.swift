@@ -24,7 +24,7 @@ class GameScene: SKScene {
         print("Raw value: \(test_tile_color_enum?.description)")
         //
         // add a gameboard to the screen
-        let game_board = Gameboard(rows: 5, columns: 5, boardWidth: self.size.width, boardHeight: self.size.height)
+        let game_board = Gameboard(rows: 10, columns: 10, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
