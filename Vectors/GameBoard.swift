@@ -16,9 +16,6 @@ class Gameboard {
         
         let board_scene_ratio = 0.75
         
-        // screen size view var is skewed?
-        //yeah i just rememereed, yo gotta add something to get the right screen size as the gamescene.ksks file messes it up
-        
         // Bottom (y = 0) so put board start at top
         print("Board Height: \(boardHeight)")
         
@@ -94,14 +91,19 @@ class Gameboard {
         self.tiles[column][row] = tile
     }
     
-    func tileFromName(tileName: String) -> Tile? {
-        // no way to access character at index in swift see: https://www.reddit.com/r/swift/comments/2bvrh9/getting_a_specific_character_in_a_string/
-        let colIndex = tileName.startIndex.advancedBy(0)
-        let rowIndex = tileName.startIndex.advancedBy(3)
-        let row = Int(String(tileName[rowIndex]))!
-        let column = Int(String(tileName[colIndex]))!
+    func tileFromName(tileName: String?) -> Tile? {
+        if let name = tileName {
+            // no way to access character at index in swift see: https://www.reddit.com/r/swift/comments/2bvrh9/getting_a_specific_character_in_a_string/
+            let colIndex = name.startIndex.advancedBy(0)
+            let rowIndex = name.startIndex.advancedBy(3)
+            let row = Int(String(name[rowIndex]))!
+            let column = Int(String(name[colIndex]))!
+            
+            return tiles[column][row]
+        }
         
-        return tiles[column][row]
+        // no tile
+        return nil
     }
     
     // change row color

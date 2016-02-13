@@ -40,12 +40,6 @@ class GameScene: SKScene {
                 self.addChild(tile.sprite!)
             }
         }
-        
-        // change color of gameboard row to red (raw value = 1) as test
-        //game_board.changeRowColor(0, color: 1)
-        
-        // change color of gameboard column to blue (raw value = 2) as test
-        //game_board.changeColumnColor(0, color: 2)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -60,7 +54,11 @@ class GameScene: SKScene {
     func didPanOnTiles(gestureRecognizer: UIPanGestureRecognizer) {
         let position = gestureRecognizer.locationInView(self.view)
         let touchedNode = getTouchedNode(position);
-        let touchedTile = game_board.tileFromName((touchedNode?.name)!)
+        let touchedTile = game_board.tileFromName(touchedNode?.name)
+        
+        guard let _ = touchedTile else {
+            return
+        }
         
         // get beginning tile
         if gestureRecognizer.state == UIGestureRecognizerState.Began {
