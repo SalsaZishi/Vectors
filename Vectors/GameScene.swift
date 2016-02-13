@@ -45,7 +45,7 @@ class GameScene: SKScene {
         game_board.changeColumnColor(4, color: (brush_color?.rawValue)!)
     }
     
-    // change brush color function
+    // NOT WORKING - WHY?
     func changeBrushColor(var b_color: BrushColor) {
         b_color = BrushColor(rawValue: (b_color.rawValue + 1) % 2)!
     }
