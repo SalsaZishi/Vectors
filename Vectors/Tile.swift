@@ -7,13 +7,9 @@
 //
 import SpriteKit
 
-// brush enum identification: red (rawValue = 0) or blue (rawValue = 1)
-enum BrushColor: Int {
-    case Red = 1, Blue
-}
-
-// tile color identification: blank(grey) = 0, red = 1, blue = 2
 enum TileColor: Int, CustomStringConvertible {
+    
+    // enum identification: blank(grey) = 0, red = 1, blue = 2
     case Blank = 0, Red, Blue
     
     var spriteName: String {
@@ -32,6 +28,7 @@ enum TileColor: Int, CustomStringConvertible {
     }
 }
 
+// by default, tile color is white
 class Tile: CustomStringConvertible {
 
     // Properties of a tile: column, row, color, sprite
@@ -67,12 +64,11 @@ class Tile: CustomStringConvertible {
         self.sprite?.name = spriteName
     }
     
-    // changes tile color according to brushColor enum (0 = red, 1 = blue)
-    // Note brush color red = 0 but tileColor red = 1. Should we change this to them being the same?
-    func changeTileColor(brush_color: BrushColor.RawValue) {
-        if (brush_color == 1) {
+    // changes color according to player
+    func changeColor(player_num: Int) {
+        if (player_num == 1) {
             self.color = .Red
-        } else {
+        } else if (player_num == 2) {
             self.color = .Blue
         }
         self.sprite?.texture = SKTexture(imageNamed: "\(spriteName)")
