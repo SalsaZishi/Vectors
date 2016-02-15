@@ -8,10 +8,8 @@
 import Foundation
 import SpriteKit
 
-// Need to make tiles into squares
 class Gameboard {
     
-    // array that holds all the tiles
     var tiles: [[Tile]] = [[Tile]]()
     
     init(rows: Int, columns: Int, boardWidth: CGFloat, boardHeight: CGFloat) {
@@ -24,10 +22,8 @@ class Gameboard {
         // Left (x = 0) so put board start at left
         print("Board Width: \(boardWidth)")
         
-        // we want each tile to be a square with equal width and height
-        // If board height and width are not equal, choose the smaller value of the two
-        // and set both equal to the smaller value
-        var boardDimension: CGFloat
+        // make gameboard square
+        let boardDimension: CGFloat
         if (boardWidth < boardHeight) {
             boardDimension = boardWidth
         } else {
@@ -46,7 +42,7 @@ class Gameboard {
         // increment x a little to the right: spriteWidth / 2.0 = center of leftmost tile
         // and 0.25 / 2 = 12.5% of the tile (center of the left gap caused by the board taking up 75% of scene)
         let xStart: CGFloat = spriteWidth/CGFloat(2.0) + CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
-        let yStart: CGFloat = boardDimension - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
+        let yStart: CGFloat = boardHeight - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
         
         // declare xCoord and yCoord vars
         var xCoord: CGFloat = CGFloat(0.0)
@@ -74,6 +70,9 @@ class Gameboard {
                     // for some reason this spacing is bigger than the actual sprite image so it
                     // causes empty nil space between the tiles...
                     xCoord += spriteWidth
+                    
+                    // this works but can't be guaranteed for all iPhones
+                    // xCoord += 20.0
                 }
                 
                 let position = CGPointMake(xCoord, yCoord)
@@ -92,13 +91,32 @@ class Gameboard {
         self.tiles[column][row] = tile
     }
     
-    func tileFromName(tileName: String) -> Tile? {
-        // no way to access character at index in swift see: https://www.reddit.com/r/swift/comments/2bvrh9/getting_a_specific_character_in_a_string/
-        let colIndex = tileName.startIndex.advancedBy(0)
-        let rowIndex = tileName.startIndex.advancedBy(3)
-        let row = Int(String(tileName[rowIndex]))!
-        let column = Int(String(tileName[colIndex]))!
+    func tileFromName(tileName: String?) -> Tile? {
+        if let name = tileName {
+            // no way to access character at index in swift see: https://www.reddit.com/r/swift/comments/2bvrh9/getting_a_specific_character_in_a_string/
+            let colIndex = name.startIndex.advancedBy(0)
+            let rowIndex = name.startIndex.advancedBy(3)
+            let row = Int(String(name[rowIndex]))!
+            let column = Int(String(name[colIndex]))!
+            
+            return tiles[column][row]
+        }
         
-        return tiles[column][row]
+        // no tile
+        return nil
+    }
+    
+    // change row color
+    func changeRowColor(row: Int, color:TileColor.RawValue) {
+        for (var i = 0; i < tiles[row].count; i++) {
+            tiles[row][i].changeColor(color)
+        }
+    }
+    
+    // change column color
+    func changeColumnColor(column: Int, color:TileColor.RawValue) {
+        for (var i = 0; i < tiles[column].count; i++) {
+            tiles[i][column].changeColor(color)
+        }
     }
 }
