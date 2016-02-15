@@ -1,6 +1,6 @@
 # Vectors
 
-Vectors/Assets.xcassets/blue_tile.imageset/
+![Imagine a Grid...](/Vectors/Assets.xcassets/grid_logo.imageset/grid.png)
 
 You start off with a 7x7 blank grid and an 2-color challenge grid image. 
 Your task is to color the blank grid until it matches the challenge image. 
