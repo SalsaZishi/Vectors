@@ -21,8 +21,8 @@ class GameScene: SKScene {
         // pan gesture recognizer
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanOnTiles:")
         let tapToChangeColorGestureRecognizer = UITapGestureRecognizer(target: self, action: "tappedOutsideOfGameboard:")
-        tapToChangeColorGestureRecognizer.numberOfTapsRequired = 2 // require two fingers
-        tapToChangeColorGestureRecognizer.numberOfTouchesRequired = 2 // require two consecutive taps
+        tapToChangeColorGestureRecognizer.numberOfTapsRequired = 1 // require two fingers
+        tapToChangeColorGestureRecognizer.numberOfTouchesRequired = 1 // require two consecutive taps
         self.view?.addGestureRecognizer(panGestureRecognizer)
         self.view?.addGestureRecognizer(tapToChangeColorGestureRecognizer)
         

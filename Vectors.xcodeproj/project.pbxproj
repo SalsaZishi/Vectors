@@ -108,7 +108,7 @@
 				TargetAttributes = {
 					7AD15DE51C6D5E76001B8683 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = W9467H5UVT;
+						DevelopmentTeam = SRJK23Z86C;
 					};
 				};
 			};
@@ -270,9 +270,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Vectors/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "Zishi-Wu.Vectors";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos9.2;
 			};
 			name = Debug;
 		};
@@ -284,9 +286,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Vectors/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "Zishi-Wu.Vectors";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos9.2;
 			};
 			name = Release;
 		};
