@@ -12,7 +12,7 @@ class GameScene: SKScene {
     var touchedTiles = [Tile]()
     var initialTouchedTile: Tile!
     var lastTouchedTile: Tile!
-    var game_board: Gameboard!
+    var game_board: GameBoard!
     var brushColor = TileColor.Red
     
     override func didMoveToView(view: SKView) {
@@ -20,7 +20,7 @@ class GameScene: SKScene {
         
         // pan gesture recognizer
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanOnTiles:")
-        let tapToChangeColorGestureRecognizer = UITapGestureRecognizer(target: self, action: "tappedOutsideOfGameboard:")
+        let tapToChangeColorGestureRecognizer = UITapGestureRecognizer(target: self, action: "tappedOutsideOfGameBoard:")
         tapToChangeColorGestureRecognizer.numberOfTapsRequired = 1 // require two fingers
         tapToChangeColorGestureRecognizer.numberOfTouchesRequired = 1 // require two consecutive taps
         self.view?.addGestureRecognizer(panGestureRecognizer)
@@ -37,7 +37,7 @@ class GameScene: SKScene {
         print("Raw value: \(test_tile_color_enum?.description)")
         
         // add a gameboard to the screen
-        game_board = Gameboard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
+        game_board = GameBoard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
@@ -45,25 +45,7 @@ class GameScene: SKScene {
                 self.addChild(tile.sprite!)
             }
         }
-        /*
-        // initialize enum representing brush color with value 0 = red
-        var brush_color = BrushColor(rawValue: 0)
-        
-        // change color of gameboard row 3 to red (raw value = 1) as test
-        game_board.changeRowColor(3, color: (brush_color?.rawValue)!)
-        
-        // change color of brush to value 1 = blue
-        changeBrushColor(brush_color!)
-        
-        // change color of gameboard column to blue (raw value = 2) as test
-        game_board.changeColumnColor(4, color: (brush_color?.rawValue)!)
-*/
     }
-    /*
-    // NOT WORKING - WHY?
-    func changeBrushColor(var b_color: BrushColor) {
-        b_color = BrushColor(rawValue: (b_color.rawValue + 1) % 2)!
-    }*/
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
@@ -74,7 +56,7 @@ class GameScene: SKScene {
     }
     
     // handle tap to change color
-    func tappedOutsideOfGameboard(gestureRecognizer: UITapGestureRecognizer) {
+    func tappedOutsideOfGameBoard(gestureRecognizer: UITapGestureRecognizer) {
         let position = gestureRecognizer.locationInView(self.view)
         let touchedNode = getTouchedNode(position);
         let touchedTile = game_board.tileFromName(touchedNode?.name)
@@ -85,7 +67,6 @@ class GameScene: SKScene {
             } else {
                 self.brushColor = .Red
             }
-            
             return
         }
     }
