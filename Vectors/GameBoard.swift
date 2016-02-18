@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class Gameboard {
+class GameBoard {
     
     var tiles: [[Tile]] = [[Tile]]()
     
@@ -67,12 +67,7 @@ class Gameboard {
                 if row == 0 {
                     xCoord = CGFloat(xStart)
                 } else {
-                    // for some reason this spacing is bigger than the actual sprite image so it
-                    // causes empty nil space between the tiles...
                     xCoord += spriteWidth
-                    
-                    // this works but can't be guaranteed for all iPhones
-                    // xCoord += 20.0
                 }
                 
                 let position = CGPointMake(xCoord, yCoord)
@@ -91,6 +86,7 @@ class Gameboard {
         self.tiles[column][row] = tile
     }
     
+    // get tile from grid with row and column specified
     func tileFromName(tileName: String?) -> Tile? {
         if let name = tileName {
             // no way to access character at index in swift see: https://www.reddit.com/r/swift/comments/2bvrh9/getting_a_specific_character_in_a_string/
@@ -101,7 +97,6 @@ class Gameboard {
             
             return tiles[column][row]
         }
-        
         // no tile
         return nil
     }
