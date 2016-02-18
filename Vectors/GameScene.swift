@@ -26,16 +26,6 @@ class GameScene: SKScene {
         self.view?.addGestureRecognizer(panGestureRecognizer)
         self.view?.addGestureRecognizer(tapToChangeColorGestureRecognizer)
         
-        // create a test tile to see which code calls what color name and is redundant
-        // initialize tile, default color is blank
-        let test_tile = Tile(column: 0, row: 0)
-        print("Description: \(test_tile.description)")
-        print("Sprite Name: \(test_tile.spriteName)")
-        
-        // red tile
-        let test_tile_color_enum = TileColor(rawValue: 1)
-        print("Raw value: \(test_tile_color_enum?.description)")
-        
         // add a gameboard to the screen
         game_board = GameBoard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
