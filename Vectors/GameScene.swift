@@ -16,6 +16,7 @@ class GameScene: SKScene {
     var brushColor = TileColor.Red
     
     override func didMoveToView(view: SKView) {
+        let levelLoader = LevelLoader(gameScene: self)
         self.size = view.bounds.size
         
         // pan gesture recognizer
@@ -27,7 +28,7 @@ class GameScene: SKScene {
         self.view?.addGestureRecognizer(tapToChangeColorGestureRecognizer)
         
         // add a gameboard to the screen
-        game_board = GameBoard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
+        game_board = levelLoader.loadLevel("test")
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
