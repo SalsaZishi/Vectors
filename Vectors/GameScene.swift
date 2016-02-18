@@ -13,13 +13,18 @@ class GameScene: SKScene {
     var initialTouchedTile: Tile!
     var lastTouchedTile: Tile!
     var game_board: Gameboard!
+    var brushColor = TileColor.Red
     
     override func didMoveToView(view: SKView) {
         self.size = view.bounds.size
         
         // pan gesture recognizer
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanOnTiles:")
-        self.view?.addGestureRecognizer(gestureRecognizer)
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanOnTiles:")
+        let tapToChangeColorGestureRecognizer = UITapGestureRecognizer(target: self, action: "tappedOutsideOfGameboard:")
+        tapToChangeColorGestureRecognizer.numberOfTapsRequired = 1 // require two fingers
+        tapToChangeColorGestureRecognizer.numberOfTouchesRequired = 1 // require two consecutive taps
+        self.view?.addGestureRecognizer(panGestureRecognizer)
+        self.view?.addGestureRecognizer(tapToChangeColorGestureRecognizer)
         
         // create a test tile to see which code calls what color name and is redundant
         // initialize tile, default color is blank
@@ -68,6 +73,23 @@ class GameScene: SKScene {
         /* Called before each frame is rendered */
     }
     
+    // handle tap to change color
+    func tappedOutsideOfGameboard(gestureRecognizer: UITapGestureRecognizer) {
+        let position = gestureRecognizer.locationInView(self.view)
+        let touchedNode = getTouchedNode(position);
+        let touchedTile = game_board.tileFromName(touchedNode?.name)
+        
+        guard let _ = touchedTile else {
+            if self.brushColor == .Red {
+                self.brushColor = .Blue
+            } else {
+                self.brushColor = .Red
+            }
+            
+            return
+        }
+    }
+    
     // handle pan gestures
     func didPanOnTiles(gestureRecognizer: UIPanGestureRecognizer) {
         let position = gestureRecognizer.locationInView(self.view)
@@ -86,9 +108,9 @@ class GameScene: SKScene {
         } else if gestureRecognizer.state == UIGestureRecognizerState.Ended {
             print("row \(lastTouchedTile.row) column \(lastTouchedTile.column)")
             if lastTouchedTile.row != initialTouchedTile.row {
-                game_board.changeRowColor(lastTouchedTile.column, color: 1)
+                game_board.changeRowColor(lastTouchedTile.column, color: self.brushColor.rawValue)
             } else if lastTouchedTile.column != initialTouchedTile.column {
-                game_board.changeColumnColor(lastTouchedTile.row, color: 1)
+                game_board.changeColumnColor(lastTouchedTile.row, color: self.brushColor.rawValue)
             }
         // while dragging
         } else {
