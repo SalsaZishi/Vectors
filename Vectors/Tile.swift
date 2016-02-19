@@ -28,6 +28,15 @@ enum TileColor: Int, CustomStringConvertible {
     }
 }
 
+// overload == operator
+func == (left: Tile, right: Tile) -> Bool {
+    return left.column == right.column && left.row == right.row && left.color == right.color
+}
+
+func != (left: Tile, right: Tile) -> Bool {
+    return !(left == right)
+}
+
 // by default, tile color is white
 class Tile: CustomStringConvertible {
 
@@ -73,6 +82,5 @@ class Tile: CustomStringConvertible {
         }
         self.sprite?.texture = SKTexture(imageNamed: "\(spriteName)")
     }
-
 }
 
