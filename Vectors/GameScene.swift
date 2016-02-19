@@ -13,10 +13,12 @@ class GameScene: SKScene {
     var initialTouchedTile: Tile!
     var lastTouchedTile: Tile!
     var game_board: GameBoard!
+    var gameController: GameController!
     var brushColor = TileColor.Red
+    var gameTimer: NSTimer!
     
     override func didMoveToView(view: SKView) {
-        let levelLoader = LevelLoader(gameScene: self)
+        // gamescene.sks messes up view, let's fix that
         self.size = view.bounds.size
         
         // pan gesture recognizer
@@ -28,7 +30,7 @@ class GameScene: SKScene {
         self.view?.addGestureRecognizer(tapToChangeColorGestureRecognizer)
         
         // add a gameboard to the screen
-        game_board = levelLoader.loadLevel("test")
+        game_board = GameBoard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
@@ -36,6 +38,38 @@ class GameScene: SKScene {
                 self.addChild(tile.sprite!)
             }
         }
+        
+        self.gameController = GameController(gameBoard: self.game_board, gameScene: self)
+        
+        // everything loaded, let us set up game timer
+        self.gameController.startTime = NSDate.timeIntervalSinceReferenceDate()
+        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+    }
+    
+    func updateTimer(timer: NSTimer) {
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        
+        var passedTime: NSTimeInterval = currentTime - self.gameController.startTime
+        
+        // calculate minutes passed
+        let minutes = UInt8(passedTime / 60.0)
+        
+        passedTime -= (NSTimeInterval(minutes) * 60)
+        
+        // seconds passed
+        let seconds = UInt8(passedTime)
+        
+        passedTime -= NSTimeInterval(seconds)
+        
+        // fraction of second passed (0.01 second accuracy)
+        let fractionOfSecond = UInt8(passedTime * 100)
+        
+        // print for now, but this can be put into a label later
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        let strFraction = String(format: "%02d", fractionOfSecond)
+        
+        print("\(strMinutes):\(strSeconds):\(strFraction)")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -78,12 +112,13 @@ class GameScene: SKScene {
             lastTouchedTile = initialTouchedTile
         // once we've ended
         } else if gestureRecognizer.state == UIGestureRecognizerState.Ended {
-            print("row \(lastTouchedTile.row) column \(lastTouchedTile.column)")
             if lastTouchedTile.row != initialTouchedTile.row {
                 game_board.changeRowColor(lastTouchedTile.column, color: self.brushColor.rawValue)
             } else if lastTouchedTile.column != initialTouchedTile.column {
                 game_board.changeColumnColor(lastTouchedTile.row, color: self.brushColor.rawValue)
             }
+            
+            self.gameController.numberOfMoves++
         // while dragging
         } else {
             lastTouchedTile = touchedTile
