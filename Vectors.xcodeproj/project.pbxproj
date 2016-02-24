@@ -17,7 +17,7 @@
 		7AD15DF51C6D5E76001B8683 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AD15DF41C6D5E76001B8683 /* Assets.xcassets */; };
 		7AD15DF81C6D5E76001B8683 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AD15DF61C6D5E76001B8683 /* LaunchScreen.storyboard */; };
 		7AD15E021C6D5F1B001B8683 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD15E011C6D5F1B001B8683 /* Tile.swift */; };
-		7AD15E041C6D7287001B8683 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD15E031C6D7287001B8683 /* Gameboard.swift */; };
+		7AD15E041C6D7287001B8683 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD15E031C6D7287001B8683 /* GameBoard.swift */; };
 		7ADEA55D1C76602600EBC7A6 /* LevelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADEA55C1C76602600EBC7A6 /* LevelLoader.swift */; };
 		7ADEA55F1C76644900EBC7A6 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADEA55E1C76644900EBC7A6 /* StreamReader.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +35,7 @@
 		7AD15DF71C6D5E76001B8683 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AD15DF91C6D5E76001B8683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AD15E011C6D5F1B001B8683 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
-		7AD15E031C6D7287001B8683 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameboard.swift; sourceTree = "<group>"; };
+		7AD15E031C6D7287001B8683 /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		7ADEA55C1C76602600EBC7A6 /* LevelLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelLoader.swift; sourceTree = "<group>"; };
 		7ADEA55E1C76644900EBC7A6 /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,7 +77,7 @@
 				1C59A1521C76962B00E487DF /* GameController.swift */,
 				7ADEA55C1C76602600EBC7A6 /* LevelLoader.swift */,
 				7ADEA55E1C76644900EBC7A6 /* StreamReader.swift */,
-				7AD15E031C6D7287001B8683 /* Gameboard.swift */,
+				7AD15E031C6D7287001B8683 /* GameBoard.swift */,
 				7AD15E011C6D5F1B001B8683 /* Tile.swift */,
 				7AD15DEF1C6D5E76001B8683 /* GameViewController.swift */,
 				7AD15DF11C6D5E76001B8683 /* Main.storyboard */,
@@ -166,7 +166,7 @@
 				7ADEA55D1C76602600EBC7A6 /* LevelLoader.swift in Sources */,
 				7AD15E021C6D5F1B001B8683 /* Tile.swift in Sources */,
 				7ADEA55F1C76644900EBC7A6 /* StreamReader.swift in Sources */,
-				7AD15E041C6D7287001B8683 /* Gameboard.swift in Sources */,
+				7AD15E041C6D7287001B8683 /* GameBoard.swift in Sources */,
 				1C59A1531C76962B00E487DF /* GameController.swift in Sources */,
 				7AD15DF01C6D5E76001B8683 /* GameViewController.swift in Sources */,
 				7AD15DEA1C6D5E76001B8683 /* AppDelegate.swift in Sources */,

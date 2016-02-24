@@ -17,7 +17,7 @@ struct DiagonalDirection {
     let yDirection: Direction
 }
 
-class Gameboard {
+class GameBoard {
     
     var tiles: [[Tile]] = [[Tile]]()
     var boardWidthByColumns: Int

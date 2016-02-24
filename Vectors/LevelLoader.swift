@@ -21,7 +21,7 @@ class LevelLoader {
     static let BLUE_TILE = "B"
     static let LEVEL_EXTENSION = ".lvl"
     
-    var gameboard: Gameboard!
+    var gameboard: GameBoard!
     let mainBundle: NSBundle
     var gameScene: GameScene
     
@@ -31,7 +31,7 @@ class LevelLoader {
         self.mainBundle = NSBundle.mainBundle()
     }
     
-    func loadLevel(levelName: String) -> Gameboard {
+    func loadLevel(levelName: String) -> GameBoard {
         
         // stream reader reads level file into an array
         let filePath = self.mainBundle.pathForResource("/levels/" + levelName, ofType: LevelLoader.LEVEL_EXTENSION)
@@ -49,7 +49,7 @@ class LevelLoader {
         }
         
         let numRows = lines[0].characters.count
-        self.gameboard = Gameboard(rows: numRows, columns: lines.count, boardWidth: self.gameScene.size.width, boardHeight: self.gameScene.size.height)
+        self.gameboard = GameBoard(rows: numRows, columns: lines.count, boardWidth: self.gameScene.size.width, boardHeight: self.gameScene.size.height)
         
         var currColumn = 0
         for line in lines {
