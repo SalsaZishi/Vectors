@@ -11,14 +11,14 @@ import Foundation
 
 // controls main state of the game and main logic of the game
 class GameController {
-    let gameBoard: GameBoard!
-    var currentLoadedLevel: GameBoard!
+    let gameBoard: Gameboard!
+    var currentLoadedLevel: Gameboard!
     var startTime: NSTimeInterval!
     
     // game state variables
     var numberOfMoves: Int
     
-    init(gameBoard: GameBoard, gameScene: GameScene) {
+    init(gameBoard: Gameboard, gameScene: GameScene) {
         let levelLoader = LevelLoader(gameScene: gameScene)
         
         self.gameBoard = gameBoard

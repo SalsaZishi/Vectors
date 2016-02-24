@@ -12,7 +12,7 @@ class GameScene: SKScene {
     var touchedTiles = [Tile]()
     var initialTouchedTile: Tile!
     var lastTouchedTile: Tile!
-    var game_board: GameBoard!
+    var game_board: Gameboard!
     var gameController: GameController!
     var brushColor = TileColor.Red
     var gameTimer: NSTimer!
@@ -30,7 +30,7 @@ class GameScene: SKScene {
         self.view?.addGestureRecognizer(tapToChangeColorGestureRecognizer)
         
         // add a gameboard to the screen
-        game_board = GameBoard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
+        game_board = Gameboard(rows: 7, columns: 7, boardWidth: self.size.width, boardHeight: self.size.height)
         // add sprites to scene
         for tiles in game_board.tiles {
             for tile in tiles {
@@ -130,7 +130,6 @@ class GameScene: SKScene {
                     yDir = .DOWN
                 // going up
                 } else {
-                    print("up")
                     yDir = .UP
                 }
                 

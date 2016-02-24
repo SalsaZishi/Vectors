@@ -8,11 +8,24 @@
 import Foundation
 import SpriteKit
 
-class GameBoard {
+enum Direction {
+    case UP, DOWN, LEFT, RIGHT
+}
+
+struct DiagonalDirection {
+    let xDirection: Direction
+    let yDirection: Direction
+}
+
+class Gameboard {
     
     var tiles: [[Tile]] = [[Tile]]()
+    var boardWidthByColumns: Int
+    var boardHeightByRows: Int
     
     init(rows: Int, columns: Int, boardWidth: CGFloat, boardHeight: CGFloat) {
+        self.boardWidthByColumns = 0
+        self.boardHeightByRows = 0
         
         let board_scene_ratio = 0.75
         
@@ -79,7 +92,11 @@ class GameBoard {
                 let newTile = Tile(column: column, row: row, spritePosition: position, spriteSize: size, spriteName: tileName)
                 tiles[column].append(newTile)
             }
+            self.boardWidthByColumns++
         }
+        
+        // we assume equal size
+        self.boardHeightByRows = self.boardWidthByColumns
     }
     
     func replaceTileAt(row: Int, column: Int, withTile tile:Tile) {
@@ -112,6 +129,80 @@ class GameBoard {
     func changeColumnColor(column: Int, color:TileColor.RawValue) {
         for (var i = 0; i < tiles[column].count; i++) {
             tiles[i][column].changeColor(color)
+        }
+    }
+    
+    func changeDiagonalColor(direction: DiagonalDirection, includingTile tile: Tile, withColor color: TileColor.RawValue) {
+        var x = tile.row, y = tile.column
+        
+        if direction.xDirection == .RIGHT {
+            // right and up
+            if direction.yDirection == .UP {
+                while x < boardWidthByColumns && y >= 0 {
+                    tiles[y][x].changeColor(color)
+                    x++
+                    y--
+                }
+                // reset
+                x = tile.row
+                y = tile.column
+                
+                while x >= 0  && y < boardHeightByRows {
+                    tiles[y][x].changeColor(color)
+                    x--
+                    y++
+                }
+            // right and down
+            } else {
+                while x < boardWidthByColumns && y < boardHeightByRows {
+                    tiles[y][x].changeColor(color)
+                    x++
+                    y++
+                }
+                // reset
+                x = tile.row
+                y = tile.column
+                
+                while x >= 0  &&  y >= 0 {
+                    tiles[y][x].changeColor(color)
+                    x--
+                    y--
+                }
+            }
+        } else {
+            // left and up
+            if direction.yDirection == .UP {
+                while x >= 0 && y >= 0 {
+                    tiles[y][x].changeColor(color)
+                    x--
+                    y--
+                }
+                // reset
+                x = tile.row
+                y = tile.column
+                
+                while x < boardWidthByColumns  && y < boardHeightByRows {
+                    tiles[y][x].changeColor(color)
+                    x++
+                    y++
+                }
+            // left and down
+            } else {
+                while x >= 0 && y < boardHeightByRows {
+                    tiles[y][x].changeColor(color)
+                    x--
+                    y++
+                }
+                // reset
+                x = tile.row
+                y = tile.column
+                
+                while x < boardWidthByColumns  && y >= 0 {
+                    tiles[y][x].changeColor(color)
+                    x++
+                    y--
+                }
+            }
         }
     }
 }
