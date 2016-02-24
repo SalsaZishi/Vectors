@@ -43,7 +43,7 @@ class GameScene: SKScene {
         
         // everything loaded, let us set up game timer
         self.gameController.startTime = NSDate.timeIntervalSinceReferenceDate()
-        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+        //self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
     }
     
     func updateTimer(timer: NSTimer) {
@@ -112,7 +112,30 @@ class GameScene: SKScene {
             lastTouchedTile = initialTouchedTile
         // once we've ended
         } else if gestureRecognizer.state == UIGestureRecognizerState.Ended {
-            if lastTouchedTile.row != initialTouchedTile.row {
+            // diagonal
+            if (lastTouchedTile.row != initialTouchedTile.row) && (lastTouchedTile.column != initialTouchedTile.column) {
+                var xDir: Direction
+                var yDir: Direction
+                
+                // going right
+                if lastTouchedTile.row > initialTouchedTile.row {
+                    xDir = .RIGHT
+                // going left
+                } else {
+                    xDir = .LEFT
+                }
+                
+                // going down
+                if lastTouchedTile.column > initialTouchedTile.column {
+                    yDir = .DOWN
+                // going up
+                } else {
+                    print("up")
+                    yDir = .UP
+                }
+                
+                self.game_board.changeDiagonalColor(DiagonalDirection(xDirection: xDir, yDirection: yDir), includingTile: self.lastTouchedTile, withColor: self.brushColor.rawValue)
+            } else if lastTouchedTile.row != initialTouchedTile.row {
                 game_board.changeRowColor(lastTouchedTile.column, color: self.brushColor.rawValue)
             } else if lastTouchedTile.column != initialTouchedTile.column {
                 game_board.changeColumnColor(lastTouchedTile.row, color: self.brushColor.rawValue)
