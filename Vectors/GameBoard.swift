@@ -133,38 +133,38 @@ class GameBoard {
     }
     
     func changeDiagonalColor(direction: DiagonalDirection, includingTile tile: Tile, withColor color: TileColor.RawValue) {
-        var x = tile.row, y = tile.column
+        var x = tile.column, y = tile.row
         
         if direction.xDirection == .RIGHT {
             // right and up
             if direction.yDirection == .UP {
-                while x < boardWidthByColumns && y >= 0 {
-                    tiles[y][x].changeColor(color)
-                    x++
-                    y--
-                }
-                // reset
-                x = tile.row
-                y = tile.column
-                
-                while x >= 0  && y < boardHeightByRows {
-                    tiles[y][x].changeColor(color)
+                while x >= 0 && y < boardWidthByColumns  {
+                    tiles[x][y].changeColor(color)
                     x--
                     y++
                 }
+                // reset
+                x = tile.column
+                y = tile.row
+                
+                while x < boardHeightByRows && y >= 0 {
+                    tiles[x][y].changeColor(color)
+                    x++
+                    y--
+                }
             // right and down
             } else {
-                while x < boardWidthByColumns && y < boardHeightByRows {
-                    tiles[y][x].changeColor(color)
+                while x < boardHeightByRows && y < boardWidthByColumns {
+                    tiles[x][y].changeColor(color)
                     x++
                     y++
                 }
                 // reset
-                x = tile.row
-                y = tile.column
+                x = tile.column
+                y = tile.row
                 
-                while x >= 0  &&  y >= 0 {
-                    tiles[y][x].changeColor(color)
+                while x >= 0 && y >= 0 {
+                    tiles[x][y].changeColor(color)
                     x--
                     y--
                 }
@@ -173,34 +173,34 @@ class GameBoard {
             // left and up
             if direction.yDirection == .UP {
                 while x >= 0 && y >= 0 {
-                    tiles[y][x].changeColor(color)
+                    tiles[x][y].changeColor(color)
                     x--
                     y--
                 }
                 // reset
-                x = tile.row
-                y = tile.column
+                x = tile.column
+                y = tile.row
                 
-                while x < boardWidthByColumns  && y < boardHeightByRows {
-                    tiles[y][x].changeColor(color)
+                while x < boardHeightByRows && y < boardWidthByColumns {
+                    tiles[x][y].changeColor(color)
                     x++
                     y++
                 }
             // left and down
             } else {
-                while x >= 0 && y < boardHeightByRows {
-                    tiles[y][x].changeColor(color)
-                    x--
-                    y++
-                }
-                // reset
-                x = tile.row
-                y = tile.column
-                
-                while x < boardWidthByColumns  && y >= 0 {
-                    tiles[y][x].changeColor(color)
+                while x < boardHeightByRows && y >= 0 {
+                    tiles[x][y].changeColor(color)
                     x++
                     y--
+                }
+                // reset
+                x = tile.column
+                y = tile.row
+                
+                while x >= 0 && y < boardWidthByColumns {
+                    tiles[x][y].changeColor(color)
+                    x--
+                    y++
                 }
             }
         }
