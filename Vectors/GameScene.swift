@@ -16,6 +16,7 @@ class GameScene: SKScene {
     var gameController: GameController!
     var brushColor = TileColor.Red
     var gameTimer: NSTimer!
+    var timerLabel: SKLabelNode!
     
     // test button
     var button: SKNode! = nil
@@ -23,6 +24,7 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         // gamescene.sks messes up view, let's fix that
         self.size = view.bounds.size
+        self.timerLabel = childNodeWithName("timerLabel") as! SKLabelNode
         
         // pan gesture recognizer
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanOnTiles:")
@@ -46,7 +48,7 @@ class GameScene: SKScene {
         
         // everything loaded, let us set up game timer
         self.gameController.startTime = NSDate.timeIntervalSinceReferenceDate()
-        //self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
         
         
         // Logic to center a button below the GameBoard
@@ -92,7 +94,7 @@ class GameScene: SKScene {
         let strSeconds = String(format: "%02d", seconds)
         let strFraction = String(format: "%02d", fractionOfSecond)
         
-        print("\(strMinutes):\(strSeconds):\(strFraction)")
+        self.timerLabel.text = "\(strMinutes):\(strSeconds):\(strFraction)"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

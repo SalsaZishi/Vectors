@@ -9,12 +9,33 @@
 import UIKit
 import SpriteKit
 
+// allows loading of .sks file
+extension SKNode {
+    class func unarchiveFromFile(file : String) -> SKNode? {
+        
+        let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks")
+        
+        let sceneData: NSData?
+        do {
+            sceneData = try NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe)
+        } catch _ {
+            sceneData = nil
+        }
+        let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData!)
+        
+        archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+        let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! GameScene
+        archiver.finishDecoding()
+        return scene
+    }
+}
+
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let scene = GameScene(fileNamed:"GameScene") {
+        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
