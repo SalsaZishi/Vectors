@@ -22,11 +22,13 @@ class GameBoard {
     var tiles: [[Tile]] = [[Tile]]()
     var boardWidthByColumns: Int
     var boardHeightByRows: Int
+    var boardHeight: CGFloat
+    var boardWidth: CGFloat
     
     init(rows: Int, columns: Int, boardWidth: CGFloat, boardHeight: CGFloat) {
         self.boardWidthByColumns = 0
         self.boardHeightByRows = 0
-        
+
         let board_scene_ratio = 0.75
         
         // Bottom (y = 0) so put board start at top
@@ -42,21 +44,19 @@ class GameBoard {
         } else {
             boardDimension = boardHeight
         }
+        self.boardHeight = boardDimension * CGFloat(board_scene_ratio)
+        self.boardWidth = self.boardHeight
         
-        // Adjust tileSprite size to fit into 75% of the board depending on number of tiles
-        let spriteHeight = CGFloat(board_scene_ratio) * boardDimension / CGFloat(columns)
-        let spriteWidth = CGFloat(board_scene_ratio) * boardDimension / CGFloat(rows)
+        // Adjust tileSprite size to create board that fits frame based on ratio and depending on number of tiles
+        let spriteHeight = CGFloat(board_scene_ratio) * boardDimension / CGFloat(rows)
+        let spriteWidth = CGFloat(board_scene_ratio) * boardDimension / CGFloat(columns)
         print("Space Height: \(spriteHeight)")
         print("Space Width: \(spriteWidth)")
         
-        // initialize coordinates for center of each tile in board in CGFloat type
-        // coordinates for center of each tile in double to be converted to CGFloat
-        // 0, 0 is bottom left so x = 0, y = boardHeight = top left
-        // increment x a little to the right: spriteWidth / 2.0 = center of leftmost tile
-        // and 0.25 / 2 = 12.5% of the tile (center of the left gap caused by the board taking up 75% of scene)
-        let xStart: CGFloat = spriteWidth/CGFloat(2.0) + CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
-        let yStart: CGFloat = boardHeight - spriteHeight/CGFloat(2.0) - CGFloat((1.0 - board_scene_ratio)/2.0) * boardDimension
-        
+        // Bottom left corner of frame is 0,0 and top right corner of frame is boardWidth, boardHeight
+        let xStart: CGFloat = (boardWidth - spriteWidth * CGFloat(columns) + spriteWidth) / 2.0
+        let yStart: CGFloat = (boardHeight + spriteHeight * CGFloat(rows) - spriteHeight) / 2.0
+            
         // declare xCoord and yCoord vars
         var xCoord: CGFloat = CGFloat(0.0)
         var yCoord: CGFloat = CGFloat(0.0)
