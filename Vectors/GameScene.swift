@@ -52,17 +52,8 @@ class GameScene: SKScene {
         
         
         // Logic to center a button below the GameBoard
-        // Let S = vertical space remaining under the GameBoard = (frame height - gameboard height) / 2.0
-        // Let r = ratio of button size to S
-        
-         // define width to be any width less than or equal to frame width
-        let buttonWidth = self.size.width / 4.0
-        
-        // define button height to be anything less than S
-        let buttonHeight = ((self.size.height - game_board.boardHeight) / 2.0) * 0.90
-        
-        // Note: can change buttonWidth and buttonHeight as long as they satisfy above criteria the button will be centered
-        button = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: buttonWidth, height: buttonHeight))
+        button = SKSpriteNode(imageNamed: "pause_button")
+        button.setScale(0.5)
         
         let midX_position = self.size.width / CGFloat(2.0)
         let midY_position = (self.size.height - game_board.boardHeight) / CGFloat(4.0)
