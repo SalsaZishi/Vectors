@@ -24,6 +24,7 @@ class GameBoard {
     var boardHeightByRows: Int
     var boardHeight: CGFloat
     var boardWidth: CGFloat
+    var currentBoard: [[Tile]] = [[Tile]]()
     
     init(rows: Int, columns: Int, boardWidth: CGFloat, boardHeight: CGFloat) {
         self.boardWidthByColumns = 0
@@ -204,5 +205,18 @@ class GameBoard {
                 }
             }
         }
+    }
+    
+    func saveCurrentBoard() {
+        
+        NSUserDefaults.standardUserDefaults().setObject(tiles, forKey: "current_board")
+ 
+        // store array of current game board into currentBoard this is loading not saving
+        currentBoard = NSUserDefaults.standardUserDefaults().objectForKey("current_board")! as! [[Tile]]
+    }
+    
+    // Alfredo write func to test the save current board func
+    func loadCurrentBoard() {
+        
     }
 }
